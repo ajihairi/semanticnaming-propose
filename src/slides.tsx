@@ -192,9 +192,24 @@ export const SLIDES: SlideDef[] = [
       <Shell>
         <SlideTitle act="A1" title="Kenapa butuh ini? Over-engineer kah?" />
         <div className="mt-7 grid gap-4 lg:grid-cols-3">
-          <ScreenshotSlot width="390" height="844" label="App v1 — Classic" className="min-h-[220px]" />
-          <ScreenshotSlot width="390" height="844" label="App v2 — New Skin" className="min-h-[220px]" />
-          <ScreenshotSlot width="390" height="844" label="App v3 — Reskin" className="min-h-[220px]" />
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl glass">
+              <img src="/screen-v1.png" alt="App v1 — Classic" className="h-full object-contain" />
+            </div>
+            <div className="text-xl text-white/50">Classic</div>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl glass">
+              <img src="/screen-v2.png" alt="App v2 — New Skin" className="h-full object-contain" />
+            </div>
+            <div className="text-xl text-white/50">New Skin</div>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl glass">
+              <img src="/screen-v3.png" alt="App v3 — Reskin" className="h-full object-contain" />
+            </div>
+            <div className="text-xl text-white/50">Reskin</div>
+          </div>
         </div>
         <div className="mt-4 glass rounded-2xl p-5">
           <div className="text-xl text-white/90 text-center">
