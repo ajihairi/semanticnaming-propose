@@ -110,7 +110,7 @@ export const SLIDES: SlideDef[] = [
             />
           </div>
           <div className="flex h-56 w-[500px] items-center justify-center overflow-hidden rounded-2xl lg:h-[600px]">
-            <img src="/gambar-slide-02.png" alt="Screenshot Transaksi" className="h-full object-contain scale-[1.8] origin-center" />
+            <img src="/gambar-slide-02.png" alt="Screenshot Transaksi" className="h-full w-full object-cover" />
           </div>
         </div>
       </Shell>
