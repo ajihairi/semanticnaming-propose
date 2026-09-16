@@ -106,7 +106,7 @@ export const SLIDES: SlideDef[] = [
               items={[
                 { num: "16", role: "UI/UX", claim: "jarak antar konten (spacing)", color: "text-pink-300" },
                 { num: "16", role: "FE Mobile", claim: "radius kartu total (corner)", color: "text-cyan-300" },
-                { num: "16dp", role: "FE Mobile", claim: "dimens resource", color: "text-emerald-300" },
+                { num: "16", role: "FE Mobile", claim: "jarak dari tepi layar (padding)", color: "text-emerald-300" },
               ]}
             />
           </div>
@@ -133,7 +133,7 @@ export const SLIDES: SlideDef[] = [
           {[
             ["16", "spacing antar konten", "kata si UI/UX bilang: jarak", "text-pink-300"],
             ["16", "radius kartu total", "FE bilang: sudut kartu", "text-cyan-300"],
-            ["16dp", "dimens resource", "FE bilang: ukuran di code", "text-emerald-300"],
+            ["16", "jarak dari tepi layar", "FE bilang: screen padding", "text-emerald-300"],
           ].map(([n, what, who, c]) => (
             <Glass key={n} className="p-5">
               <div className={`font-mono text-3xl font-black ${c}`}>{n}</div>
