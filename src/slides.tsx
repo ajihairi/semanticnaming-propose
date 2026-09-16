@@ -95,7 +95,7 @@ export const SLIDES: SlideDef[] = [
     body: (
       <Shell>
         <SlideTitle act="A1" title="Berapa Angka di Layar Ini?" />
-        <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1fr_minmax(0,300px)]">
+        <div className="mt-6 grid items-center gap-6 lg:grid-cols-[auto_1fr]">
           <div>
             <p className="max-w-3xl text-xl text-white/90">
               Layar ini adalah <b className="text-white">Konfirmasi Transfer</b>.{" "}
@@ -109,8 +109,8 @@ export const SLIDES: SlideDef[] = [
               ]}
             />
           </div>
-          <div className="flex h-56 w-full items-center justify-center overflow-hidden rounded-2xl lg:h-[380px]">
-            <img src="/gambar-slide-02.png" alt="Screenshot Transaksi" className="h-full object-contain" />
+          <div className="flex h-56 w-[500px] items-center justify-center overflow-hidden rounded-2xl lg:h-[600px]">
+            <img src="/gambar-slide-02.png" alt="Screenshot Transaksi" className="h-full object-contain scale-[1.8] origin-center" />
           </div>
         </div>
       </Shell>
