@@ -296,7 +296,7 @@ export const SLIDES: SlideDef[] = [
       <Shell>
         <SlideTitle act="A2" title="Satu bahasa, empat wujud" />
         <div className="mt-6 grid gap-3 lg:grid-cols-2">
-          <Glass className="p-6">
+          <div className="rounded-2xl bg-black/60 p-6">
             <div className="font-mono text-xl text-cyan-200">{"{context}.{property}.{direction}.{size}"}</div>
             <Bullets
               items={[
@@ -305,8 +305,8 @@ export const SLIDES: SlideDef[] = [
                 { t: "Dev milih mau ngapain", d: "bukan butuh angka berapa" },
               ]}
             />
-          </Glass>
-          <Glass className="p-6">
+          </div>
+          <div className="rounded-2xl bg-black/60 p-6">
             <Tabs
               tabs={[
                 {
@@ -328,7 +328,7 @@ export const SLIDES: SlideDef[] = [
               ]}
             />
             <p className="mt-3 text-xs text-slate-200">Bahasa sama, wujud beda per platform.</p>
-          </Glass>
+          </div>
         </div>
       </Shell>
     ),
