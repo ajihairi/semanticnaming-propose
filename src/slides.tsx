@@ -108,7 +108,6 @@ export const SLIDES: SlideDef[] = [
                 { num: "16", role: "UI/UX", claim: "jarak antar konten (spacing)", color: "text-pink-300" },
                 { num: "16", role: "iOS", claim: "radius kartu total (corner)", color: "text-cyan-300" },
                 { num: "16dp", role: "Android", claim: "dimens resource", color: "text-emerald-300" },
-                { num: '"00"', role: "Backend", claim: "response code sukses", color: "text-amber-300" },
               ]}
             />
           </div>
@@ -136,7 +135,6 @@ export const SLIDES: SlideDef[] = [
             ["16", "spacing antar konten", "kata si UI/UX bilang: jarak", "text-pink-300"],
             ["16", "radius kartu total", "iOS bilang: sudut `cenah`", "text-cyan-300"],
             ["16dp", "dimens resource", "Android bilang: kayanya ukuran", "text-emerald-300"],
-            ['"00"', "response sukses", "Backend bilang: kode", "text-amber-300"],
           ].map(([n, what, who, c]) => (
             <Glass key={n} className="p-5">
               <div className={`font-mono text-3xl font-black ${c}`}>{n}</div>
@@ -204,7 +202,7 @@ export const SLIDES: SlideDef[] = [
         </div>
         <div className="mt-4 glass rounded-2xl p-5">
           <div className="text-xl text-white/90 text-center">
-            Layout <span className="text-cyan-300 font-bold">SAMA</span>. Style <span className="text-fuchsia-300 font-bold">BEDA BANGET</span>. Spacing & radius tetap — karena pakai token.
+            Layout <span className="text-cyan-300 font-bold">SAMA</span>. Style <span className="text-fuchsia-300 font-bold">BEDA BANGET</span>.
           </div>
         </div>
       </Shell>
@@ -325,14 +323,6 @@ export const SLIDES: SlideDef[] = [
                     { left: "color_semantic_primary", right: "teks/warna brand" },
                   ],
                 },
-                {
-                  name: "🔌 Backend",
-                  rows: [
-                    { left: "responseCode", right: '"00" = sukses (konstanta, bukan ajaib)' },
-                    { left: "errorType", right: "enum terstandardisasi" },
-                    { left: "message", right: "pesan ke user" },
-                  ],
-                },
               ]}
             />
             <p className="mt-3 text-xs text-slate-200">Bahasa sama, wujud beda per platform.</p>
@@ -423,7 +413,7 @@ export const SLIDES: SlideDef[] = [
     act: "A3",
     actColor: "#34d399",
     title: "Satu layar, empat tahap, empat bahasa",
-    note: "Transisi ke case study. Layar Konfirmasi Transfer dibedah dari lahir sampai jalan: Figma → iOS → Android → Backend.",
+    note: "Transisi ke case study. Layar Konfirmasi Transfer dibedah dari lahir sampai jalan: Figma → iOS → Android.",
     body: (
       <Shell>
         <SlideTitle act="A3" title="Satu layar, empat tahap, empat bahasa" />
@@ -433,7 +423,6 @@ export const SLIDES: SlideDef[] = [
               { label: "🎨 Figma", sub: "spacing & radius jadi nama" },
               { label: "🍎 iOS", sub: "dari .padding(16)" },
               { label: "🤖 Android", sub: "dimens & resource" },
-              { label: "🔌 Backend", sub: '"00" & errorType' },
             ]}
           />
         </div>
@@ -541,50 +530,6 @@ export const SLIDES: SlideDef[] = [
                 Gue gak bisa klaim Android BRI udah sempurna gini. Ini <b className="text-white">blueprint</b> — iOS udah jalan, bahasa-nya bisa ditiru.
               </p>
             </Glass>
-          </div>
-        </div>
-      </Shell>
-    ),
-  },
-  {
-    id: "s13",
-    act: "A3",
-    actColor: "#34d399",
-    title: "Backend punya magic number-nya sendiri",
-    note: "Fakta nyata: error envelope {responseCode, errorType, message} lagi distandarisasi BRI lintas BE×FE×platform. errorType jadi kontrak yang nyetir UI.",
-    body: (
-      <Shell>
-        <SlideTitle act="A3" title="Backend punya magic number-nya sendiri" />
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          <div>
-            <CodeBlock
-              title="Sebelum: string bebas"
-              rows={[
-                { t: '{ "errorType": "bottom-sheet-2fa" }', tone: "del" },
-                { t: '{ "errorType": "BOTTOMSHEET2FA" }', tone: "del" },
-                { t: "// tiap platform nebak sendiri 😵", tone: "dim" },
-              ]}
-            />
-            <CodeBlock
-              title="Sekarang: kontrak bersama (lagi dirapiin BRI)"
-              rows={[
-                { t: "{", tone: "add" },
-                { t: '  "responseCode": "00",', tone: "add" },
-                { t: '  "errorType": "BOTTOM_SHEET",', tone: "add" },
-                { t: '  "message": "..."', tone: "add" },
-                { t: "}", tone: "add" },
-              ]}
-            />
-          </div>
-          <div className="flex flex-col justify-center gap-3">
-            <div className="text-2xl font-bold text-white">UI tinggal patuh, gak nebak</div>
-            <p className="text-xl text-white/90">
-              <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs">responseCode "00"</code> = sukses → decode ke model.{" "}
-              <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs">errorType</code> = <b className="text-white">enum kontrak</b> yang nyetir UI (bottom sheet, help center, back to home).
-            </p>
-            <div className="text-xl text-white/70">
-              Bukti: gerakan ini lagi jalan <b className="text-emerald-300">lintas platform</b> di BRI — bukan isu iOS doang.
-            </div>
           </div>
         </div>
       </Shell>
@@ -757,14 +702,13 @@ export const SLIDES: SlideDef[] = [
     act: "A4",
     actColor: "#e879f9",
     title: "Bukan cuma iOS",
-    note: "Templating = pola universal. Android wizard, backend codegen, Figma component. Prinsip: jangan generate manual, generate dari pola.",
+    note: "Templating = pola universal. Android wizard, Figma component. Prinsip: jangan generate manual, generate dari pola.",
     body: (
       <Shell>
         <SlideTitle act="A4" title="Bukan cuma iOS" />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card icon="🍎" title="iOS" desc="Tuist scaffold + Xcode file template" className="ring-1 ring-emerald-300/20" />
           <Card icon="🤖" title="Android" desc="Wizard module → resource + screen token-clean (pola sama)" />
-          <Card icon="🔌" title="Backend" desc="Codegen endpoint + enum contract — bukan string ajaib" />
           <Card icon="🎨" title="UI/UX" desc="Figma component + variables — sumber polanya" />
         </div>
         <div className="glass mt-8 rounded-2xl p-6 text-center">
@@ -793,7 +737,6 @@ export const SLIDES: SlideDef[] = [
             { role: "🎨 UI/UX", text: "Kasih nama di Figma — jangan kirim angka lepas", emoji: "🎯" },
             { role: "🧑‍💻 Dev", text: "PR berikutnya: ganti SATU angka ajaib jadi semantic name", emoji: "🔧" },
             { role: "📋 Lead/PM", text: "Kasih kapasitas + dukung standarisasi lintas platform", emoji: "📐" },
-            { role: "🔌 Backend", text: "Kontrak baru = enum, bukan string bebas", emoji: "🧾" },
           ]}
         />
       </Shell>
@@ -828,7 +771,7 @@ export const SLIDES: SlideDef[] = [
           </div>
           <div className="flex flex-col justify-center gap-3">
             <p className="text-2xl text-slate-200">
-              Layar yang sama. Tapi sekarang tiap orang yang buka — desainer, iOS, Android, backend —{" "}
+              Layar yang sama. Tapi sekarang tiap orang yang buka — desainer, iOS, Android —{" "}
               <b className="text-white">langsung ngerti keputusannya</b>.
             </p>
             <div className="text-xl text-white/70">
