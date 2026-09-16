@@ -201,6 +201,8 @@ function Remote() {
   const ch = useChannel();
   const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
+  const remoteUrl = typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}?remote=control` : "";
+
   /* listen for slide updates from deck */
   useEffect(() => {
     if (!ch) return;
@@ -225,85 +227,110 @@ function Remote() {
   const total = SLIDES.length;
   const pct = ((index + 1) / total) * 100;
 
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&bgcolor=06070c&color=ffffff&data=${encodeURIComponent(remoteUrl)}`;
+
   return (
-    <div className="min-h-screen bg-[#06070c] text-white p-6 sm:p-10">
-      {/* header */}
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">🎛️ Remote Control</h1>
-        <span className={`rounded-full px-3 py-1 text-sm font-mono ${connected ? "bg-emerald-500/20 text-emerald-300" : "bg-white/10 text-white/50"}`}>
-          {connected ? "● connected" : "○ waiting…"}
-        </span>
-      </div>
+    <div className="fixed inset-0 overflow-hidden">
+      {/* 3D bg same as main deck */}
+      <div className="neon-mesh absolute inset-0 -z-20" />
+      <MagicScene active={index} />
 
-      {/* slide counter + nav */}
-      <div className="glass rounded-2xl p-6 mb-6">
-        <div className="flex items-center gap-6 mb-4">
-          <button onClick={sendPrev} disabled={index === 0}
-            className="glass flex h-16 w-16 items-center justify-center rounded-full text-3xl transition enabled:hover:bg-white/10 disabled:opacity-30">
-            ←
-          </button>
-          <div className="flex-1 text-center">
-            <div className="text-6xl font-black font-mono">{String(index + 1).padStart(2, "0")}</div>
-            <div className="text-xl text-white/50 mt-1">of {total}</div>
-          </div>
-          <button onClick={sendNext} disabled={index === total - 1}
-            className="glass flex h-16 w-16 items-center justify-center rounded-full text-3xl transition enabled:hover:bg-white/10 disabled:opacity-30">
-            →
-          </button>
+      <main className="relative z-10 min-h-screen overflow-y-auto p-6 sm:p-10">
+        {/* header */}
+        <div className="flex items-center justify-between mb-8">
+          <span className="glass rounded-full px-4 py-1.5 text-[18px] font-bold tracking-wide text-white">
+            🎛️ Remote Control
+          </span>
+          <span className={`glass rounded-full px-3 py-1.5 text-[16px] font-mono ${connected ? "text-emerald-300" : "text-white/50"}`}>
+            {connected ? "● connected" : "○ waiting…"}
+          </span>
         </div>
-        {/* progress bar */}
-        <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 transition-[width] duration-300" style={{ width: `${pct}%` }} />
-        </div>
-      </div>
 
-      {/* current slide title */}
-      <div className="glass rounded-2xl p-5 mb-6">
-        <div className="text-sm uppercase tracking-wider text-white/50 mb-2">Current Slide</div>
-        <div className="text-2xl font-bold">{title}</div>
-      </div>
-
-      {/* speaker notes / cheat sheet */}
-      <div className="glass rounded-2xl p-5 mb-6">
-        <div className="text-sm uppercase tracking-wider text-white/50 mb-3">📝 Speaker Notes</div>
-        <p className="text-xl leading-relaxed text-white/90">{note}</p>
-      </div>
-
-      {/* quick jump grid */}
-      <div className="glass rounded-2xl p-5">
-        <div className="text-sm uppercase tracking-wider text-white/50 mb-3">Jump to Slide</div>
-        <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
-          {SLIDES.map((s, i) => (
+        {/* QR code + slide counter side by side */}
+        <div className="grid gap-6 lg:grid-cols-[auto_1fr] mb-6">
+          {/* QR code card */}
+          <div className="glass rounded-2xl p-6 flex flex-col items-center gap-4">
+            <div className="text-sm uppercase tracking-wider text-white/50">Scan to open on phone</div>
+            <img src={qrSrc} alt="QR Remote" className="rounded-xl" width={220} height={220} />
+            <div className="text-xs text-white/40 font-mono break-all text-center max-w-[240px]">{remoteUrl}</div>
             <button
-              key={s.id}
-              onClick={() => sendJump(i)}
-              className={`rounded-lg py-2 text-sm font-mono transition ${
-                i === index
-                  ? "bg-white/25 text-white ring-1 ring-white/50"
-                  : "bg-white/5 text-white/50 hover:bg-white/15 hover:text-white"
-              }`}
+              onClick={() => navigator.clipboard?.writeText(remoteUrl)}
+              className="glass rounded-full px-4 py-1.5 text-sm text-white/70 hover:text-white transition"
             >
-              {i + 1}
+              📋 Copy link
             </button>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* all notes cheat sheet */}
-      <div className="mt-8">
-        <div className="text-sm uppercase tracking-wider text-white/50 mb-3">📋 All Notes Cheat Sheet</div>
-        <div className="space-y-3">
-          {SLIDES.map((s, i) => (
-            <div key={s.id} className={`glass rounded-xl p-4 transition ${i === index ? "ring-1 ring-cyan-400/50" : "opacity-60"}`}>
-              <div className="flex items-center gap-3 mb-1">
-                <span className="font-mono text-sm text-white/50">{String(i + 1).padStart(2, "0")}</span>
-                <span className="font-bold text-white">{s.title}</span>
+          {/* slide counter + nav */}
+          <div className="glass rounded-2xl p-6 flex flex-col justify-center">
+            <div className="flex items-center gap-6 mb-4">
+              <button onClick={sendPrev} disabled={index === 0}
+                className="glass flex h-16 w-16 items-center justify-center rounded-full text-3xl transition enabled:hover:bg-white/10 disabled:opacity-30">
+                ←
+              </button>
+              <div className="flex-1 text-center">
+                <div className="text-7xl font-black font-mono">{String(index + 1).padStart(2, "0")}</div>
+                <div className="text-xl text-white/50 mt-1">of {total}</div>
               </div>
-              <p className="text-sm text-white/70 ml-8">{s.note}</p>
+              <button onClick={sendNext} disabled={index === total - 1}
+                className="glass flex h-16 w-16 items-center justify-center rounded-full text-3xl transition enabled:hover:bg-white/10 disabled:opacity-30">
+                →
+              </button>
             </div>
-          ))}
+            <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 transition-[width] duration-300" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
         </div>
-      </div>
+
+        {/* current slide title */}
+        <div className="glass rounded-2xl p-5 mb-6">
+          <div className="text-sm uppercase tracking-wider text-white/50 mb-2">Current Slide</div>
+          <div className="text-3xl font-bold">{title}</div>
+        </div>
+
+        {/* speaker notes / cheat sheet */}
+        <div className="glass rounded-2xl p-5 mb-6">
+          <div className="text-sm uppercase tracking-wider text-white/50 mb-3">📝 Speaker Notes</div>
+          <p className="text-2xl leading-relaxed text-white/90">{note}</p>
+        </div>
+
+        {/* quick jump grid */}
+        <div className="glass rounded-2xl p-5 mb-6">
+          <div className="text-sm uppercase tracking-wider text-white/50 mb-3">Jump to Slide</div>
+          <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+            {SLIDES.map((s, i) => (
+              <button
+                key={s.id}
+                onClick={() => sendJump(i)}
+                className={`rounded-lg py-2.5 text-base font-mono transition ${
+                  i === index
+                    ? "bg-white/25 text-white ring-1 ring-white/50"
+                    : "bg-white/5 text-white/50 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* all notes cheat sheet */}
+        <div className="mb-10">
+          <div className="text-sm uppercase tracking-wider text-white/50 mb-3">📋 All Notes Cheat Sheet</div>
+          <div className="space-y-3">
+            {SLIDES.map((s, i) => (
+              <div key={s.id} className={`glass rounded-xl p-4 transition ${i === index ? "ring-1 ring-cyan-400/50" : "opacity-60"}`}>
+                <div className="flex items-center gap-3 mb-1">
+                  <span className="font-mono text-base text-white/50">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-bold text-lg text-white">{s.title}</span>
+                </div>
+                <p className="text-lg text-white/70 ml-8">{s.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
