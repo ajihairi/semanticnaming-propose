@@ -12,7 +12,6 @@ import {
   Card,
   GameGrid,
   Tabs,
-  ScreenshotSlot,
 } from "./ui";
 
 export type SlideDef = {
@@ -191,22 +190,22 @@ export const SLIDES: SlideDef[] = [
     body: (
       <Shell>
         <SlideTitle act="A1" title="Kenapa butuh ini? Over-engineer kah?" />
-        <div className="mt-7 grid gap-4 lg:grid-cols-3">
+        <div className="mt-7 grid gap-4 sm:grid-cols-3">
           <div className="flex flex-col items-center gap-3">
-            <div className="flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl glass">
-              <img src="/screen-v1.png" alt="App v1 — Classic" className="h-full object-contain" />
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/screen-v1.png" alt="App v1 — Classic" className="h-full max-h-[400px] object-contain" />
             </div>
             <div className="text-xl text-white/50">Classic</div>
           </div>
           <div className="flex flex-col items-center gap-3">
-            <div className="flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl glass">
-              <img src="/screen-v2.png" alt="App v2 — New Skin" className="h-full object-contain" />
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/screen-v2.png" alt="App v2 — New Skin" className="h-full max-h-[400px] object-contain" />
             </div>
             <div className="text-xl text-white/50">New Skin</div>
           </div>
           <div className="flex flex-col items-center gap-3">
-            <div className="flex h-[220px] w-full items-center justify-center overflow-hidden rounded-2xl glass">
-              <img src="/screen-v3.png" alt="App v3 — Reskin" className="h-full object-contain" />
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/screen-v3.png" alt="App v3 — Reskin" className="h-full max-h-[400px] object-contain" />
             </div>
             <div className="text-xl text-white/50">Reskin</div>
           </div>
@@ -596,27 +595,17 @@ export const SLIDES: SlideDef[] = [
       <Shell>
         <SlideTitle act="A4" title="Satu perintah, satu modul" />
         <div className="mt-7 grid gap-4 lg:grid-cols-2">
-          <CodeBlock
-            title="terminal"
-            rows={[
-              { t: "$ make module name=Transfer type=confirmation", tone: "add" },
-              { t: "→ Features/Transfer/", tone: "dim" },
-              { t: "  ├─ Data/    (Repository, Request, Response)", tone: "dim" },
-              { t: "  ├─ Domain/  (Entity, UseCase)", tone: "dim" },
-              { t: "  └─ Presentation/Confirmation/", tone: "dim" },
-              { t: "     ├─ TransferConfirmationStore.swift", tone: "dim" },
-              { t: "     └─ TransferConfirmationView.swift", tone: "dim" },
-              { t: "→ terdaftar otomatis di project build ⚡", tone: "dim" },
-            ]}
-          />
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-4">
+            <img src="/template-arch.png" alt="Template Architecture" className="w-full object-contain" />
+          </div>
           <div className="flex flex-col justify-center gap-3">
-            <div className="text-2xl font-bold text-white">Gak mulai dari kertas kosong</div>
+            <div className="text-2xl font-bold text-white">Satu perintah, satu modul lengkap</div>
             <p className="text-xl text-white/90">
-              Bukan cuma file kosong — struktur Data/Domain/Presentation + pola UDF (State → Action → Reducer) konsisten,{" "}
+              Struktur Data/Domain/Presentation + pola UDF (State → Action → Reducer) konsisten,{" "}
               <b className="text-white">langsung ke-register</b> ke project.
             </p>
             <div className="text-xl text-white/90">
-              Dev mulai dari <span className="text-fuchsia-300">pola yang udah bener</span> — bukan kertas yang bisa digambar sembarangan.
+              Dev mulai dari <span className="text-fuchsia-300">pola yang udah bener</span>.
             </div>
           </div>
         </div>
@@ -633,20 +622,9 @@ export const SLIDES: SlideDef[] = [
       <Shell>
         <SlideTitle act="A4" title="New File → BRI Template UI" />
         <div className="mt-7 grid gap-4 lg:grid-cols-2">
-          <Glass className="p-6">
-            <div className="font-mono text-xl text-slate-200">File &gt; New &gt; BRI Template UI</div>
-            <div className="mt-3 space-y-2">
-              {["└─ Inquiry Store", "└─ Inquiry View", "└─ Confirmation Store", "└─ Confirmation View"].map((f) => (
-                <div key={f} className="rounded-lg bg-white/[0.05] px-4 py-2.5 font-mono text-xl text-slate-200">
-                  {f}
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 text-xl text-slate-200">
-              Simpan <code className="font-mono text-cyan-300">TransferConfirmationStore.swift</code> +{" "}
-              <code className="font-mono text-cyan-300">TransferConfirmationView.swift</code>
-            </div>
-          </Glass>
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-4">
+            <img src="/template-xcode.png" alt="Xcode Template" className="w-full object-contain" />
+          </div>
           <div className="flex flex-col justify-center gap-3">
             <div className="text-2xl font-bold text-white">Kerangka, bukan kotak hitam</div>
             <p className="text-xl text-white/90">
@@ -671,27 +649,31 @@ export const SLIDES: SlideDef[] = [
       <Shell>
         <SlideTitle act="A4" title="Layar tadi? Sekarang lahir dari template" />
         <div className="mt-7 grid items-stretch gap-4 lg:grid-cols-2">
-          <Glass className="flex flex-col p-6">
-            <div className="text-xs uppercase tracking-widest text-slate-200">Slide 2 · layar pembuka</div>
-            <ScreenshotSlot
-              width="1284"
-              height="2778"
-              label="Konfirmasi Transfer — hasil generate template"
-              className="mt-3 min-h-[260px] flex-1"
-            />
+          <Glass className="flex flex-col gap-3 p-6">
+            <div className="text-xs uppercase tracking-widest text-slate-200">Hasil generate template</div>
+            <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl">
+              <img src="/template-native.png" alt="Generated Output" className="max-h-[300px] object-contain" />
+            </div>
+            <div className="flex gap-3">
+              <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl glass p-2">
+                <img src="/template-framework.png" alt="Framework Target" className="max-h-[120px] object-contain" />
+              </div>
+              <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl glass p-2">
+                <img src="/template-arch.png" alt="Architecture" className="max-h-[120px] object-contain" />
+              </div>
+            </div>
           </Glass>
           <div className="flex flex-col justify-center gap-3">
-            <div className="text-2xl font-bold text-white">Output template: token-clean</div>
+            <div className="text-2xl font-bold text-white">Output template: token clean</div>
             <p className="text-xl text-white/90">
-              Buka hasil generate → gak ada <code className="rounded bg-white/10 px-1.5 font-mono text-xs">.padding(16)</code>. Yang ada: token spacing, token radius,{" "}
-              <code className="rounded bg-white/10 px-1.5 font-mono text-xs">BRIColors.Semantic.*</code>.
+              Template menghasilkan kode yang sudah menggunakan semantic tokens — bukan angka ajaib.
             </p>
-            <div className="glass rounded-xl px-4 py-3 text-center text-2xl font-bold text-emerald-300">
-              Nol angka ajaib di output ✨
+            <div className="glass rounded-xl px-4 py-3 text-center text-xl font-bold text-amber-300">
+              In development — sebagian belum merge ke main
             </div>
             <p className="text-xl text-white/70">
-              Dev baru, dev buru-buru, dev yang gak hafal design system —{" "}
-              <b className="text-white">semua otomatis bener</b>.
+              Dev baru, dev buru-buru —{" "}
+              <b className="text-white">semua otomatis bener dari awal</b>.
             </p>
           </div>
         </div>
