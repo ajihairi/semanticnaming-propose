@@ -82,7 +82,7 @@ function Rig({ active }: { active: number }) {
       <Float speed={1.8} rotationIntensity={0.4} floatIntensity={0.8}>
         <mesh position={[5.4, 2.8, -2.4]} scale={0.5}>
           <torusKnotGeometry args={[1.6, 0.4, 140, 20]} />
-          <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.12} />
+          <meshBasicMaterial color="#3b3f5c" wireframe transparent opacity={0.12} />
         </mesh>
       </Float>
 
@@ -113,11 +113,11 @@ export function MagicScene({ active }: { active: number }) {
       style={{ position: "fixed", inset: 0, pointerEvents: "none" }}
     >
       <ambientLight intensity={0.9} />
-      <directionalLight position={[5, 7, 6]} intensity={1.1} color="#ffffff" />
-      <pointLight position={[-7, 4, -3]} intensity={90} color="#e2e8f0" />
-      <pointLight position={[7, -4, 3]} intensity={70} color="#cbd5e1" />
+      <directionalLight position={[5, 7, 6]} intensity={1.1} color="#6366f1" />
+      <pointLight position={[-7, 4, -3]} intensity={90} color="#4f46e5" />
+      <pointLight position={[7, -4, 3]} intensity={70} color="#3730a3" />
       <Rig active={active} />
-      <Sparkles count={130} scale={[24, 15, 9]} size={1.7} speed={0.3} color="#dbe2ea" opacity={0.3} />
+      <Sparkles count={130} scale={[24, 15, 9]} size={1.7} speed={0.3} color="#818cf8" opacity={0.3} />
     </Canvas>
   );
 }
