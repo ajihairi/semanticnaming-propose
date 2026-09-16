@@ -728,7 +728,6 @@ export const SLIDES: SlideDef[] = [
               ["16", "→", "screen.margin", "text-pink-300"],
               ["16", "→", "card.radius", "text-cyan-300"],
               ["24", "→", "section.gap", "text-emerald-300"],
-              ['"00"', "→", "responseCode", "text-amber-300"],
             ].map(([a, _, b, c]) => (
               <div key={a} className="glass flex items-center gap-3 rounded-xl px-5 py-3 font-mono text-sm">
                 <span className={`font-black ${c}`}>{a}</span>
@@ -742,9 +741,6 @@ export const SLIDES: SlideDef[] = [
               Layar yang sama. Tapi sekarang tiap orang yang buka — desainer, developer —{" "}
               <b className="text-white">langsung ngerti keputusannya</b>.
             </p>
-            <div className="text-xl text-white/70">
-              Slide & konten: <code className="font-mono text-sm">intern/todo/presentation-semantic-naming-approach.md</code> · GitHub? tanya aja 👋
-            </div>
           </div>
         </div>
         <div className="mt-10 text-2xl font-semibold text-amber-200">Terima kasih — Q&amp;A terbuka 💬</div>
