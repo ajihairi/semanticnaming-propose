@@ -287,6 +287,43 @@ export const SLIDES: SlideDef[] = [
     ),
   },
   {
+    id: "s07",
+    act: "A2",
+    actColor: "#22d3ee",
+    title: "Kenapa Dev Gak Pake Token?",
+    note: "Token spacing kami udah ada setahun, adopsi 0%. Bukan salah dev — nama 'twelve' gak bilang buat apa.",
+    body: (
+      <Shell>
+        <SlideTitle act="A2" title="Kenapa Dev Gak Pake Token?" />
+        <CodeCmp
+          title="Token spacing"
+          before={[
+            { t: 'spacing = twelve', tone: "del" },
+            { t: '// → 12', tone: "dim" },
+            { t: '// 12 buat apa? Gak tau.', tone: "dim" },
+          ]}
+          after={[
+            { t: 'spacing = sectionGap', tone: "add" },
+            { t: '// → 24', tone: "dim" },
+            { t: '// Jarak antar section. Jelas.', tone: "dim" },
+          ]}
+        />
+        <Glass className="mt-6 flex max-w-3xl items-center gap-4 rounded-2xl border-l-4 border-l-amber-300 p-6">
+          <div className="text-4xl">🤔</div>
+          <p className="text-xl text-white/90">
+            Token udah ada <b className="text-white">setahun</b>. Tapi namanya{" "}
+            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">twelve</code>,{" "}
+            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">sixteen</code>.{" "}
+            Dev baca nama itu, gak ngerti buat apa → ya udah nulis <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono">12</code> langsung.
+          </p>
+        </Glass>
+        <div className="mt-5 text-2xl font-semibold text-white">
+          Nama yang jelas → dev pake sendiri. Nama yang aneh → dev males pake.
+        </div>
+      </Shell>
+    ),
+  },
+  {
     id: "s06",
     act: "A2",
     actColor: "#22d3ee",
@@ -329,43 +366,6 @@ export const SLIDES: SlideDef[] = [
             />
             <p className="mt-3 text-xs text-slate-200">Bahasa sama, wujud beda per platform.</p>
           </div>
-        </div>
-      </Shell>
-    ),
-  },
-  {
-    id: "s07",
-    act: "A2",
-    actColor: "#22d3ee",
-    title: "Kenapa Dev Gak Pake Token?",
-    note: "Token spacing kami udah ada setahun, adopsi 0%. Bukan salah dev — nama 'twelve' gak bilang buat apa.",
-    body: (
-      <Shell>
-        <SlideTitle act="A2" title="Kenapa Dev Gak Pake Token?" />
-        <CodeCmp
-          title="Token spacing"
-          before={[
-            { t: 'spacing = twelve', tone: "del" },
-            { t: '// → 12', tone: "dim" },
-            { t: '// 12 buat apa? Gak tau.', tone: "dim" },
-          ]}
-          after={[
-            { t: 'spacing = sectionGap', tone: "add" },
-            { t: '// → 24', tone: "dim" },
-            { t: '// Jarak antar section. Jelas.', tone: "dim" },
-          ]}
-        />
-        <Glass className="mt-6 flex max-w-3xl items-center gap-4 rounded-2xl border-l-4 border-l-amber-300 p-6">
-          <div className="text-4xl">🤔</div>
-          <p className="text-xl text-white/90">
-            Token udah ada <b className="text-white">setahun</b>. Tapi namanya{" "}
-            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">twelve</code>,{" "}
-            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">sixteen</code>.{" "}
-            Dev baca nama itu, gak ngerti buat apa → ya udah nulis <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono">12</code> langsung.
-          </p>
-        </Glass>
-        <div className="mt-5 text-2xl font-semibold text-white">
-          Nama yang jelas → dev pake sendiri. Nama yang aneh → dev males pake.
         </div>
       </Shell>
     ),
