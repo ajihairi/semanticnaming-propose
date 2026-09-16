@@ -337,35 +337,35 @@ export const SLIDES: SlideDef[] = [
     id: "s07",
     act: "A2",
     actColor: "#22d3ee",
-    title: "Bukan malas. Namanya gak ngasih tau.",
-    note: "Token spacing kami ada setahun, adopsi 0%. Bukan salah dev — nama 'twelve' gak bilang buat apa. Naming 90% dari adopsi.",
+    title: "Kenapa Dev Gak Pake Token?",
+    note: "Token spacing kami udah ada setahun, adopsi 0%. Bukan salah dev — nama 'twelve' gak bilang buat apa.",
     body: (
       <Shell>
-        <SlideTitle act="A2" title="Bukan malas. Namanya gak ngasih tau." />
+        <SlideTitle act="A2" title="Kenapa Dev Gak Pake Token?" />
         <CodeCmp
           title="Token spacing"
           before={[
-            { t: 'BRISpacing.twelve.rawValue', tone: "del" },
-            { t: "// → 12", tone: "dim" },
-            { t: "// Buat apa? Entah.", tone: "dim" },
+            { t: 'spacing = twelve', tone: "del" },
+            { t: '// → 12', tone: "dim" },
+            { t: '// 12 buat apa? Gak tau.', tone: "dim" },
           ]}
           after={[
-            { t: 'BRISpacing.contentSectionGap', tone: "add" },
-            { t: "// → 24", tone: "dim" },
-            { t: "// Jarak antar section. Jelas.", tone: "dim" },
+            { t: 'spacing = sectionGap', tone: "add" },
+            { t: '// → 24', tone: "dim" },
+            { t: '// Jarak antar section. Jelas.', tone: "dim" },
           ]}
         />
         <Glass className="mt-6 flex max-w-3xl items-center gap-4 rounded-2xl border-l-4 border-l-amber-300 p-6">
-          <div className="text-4xl">🧠</div>
-          <p className="text-xl text-slate-200">
-            Token spacing kami <b className="text-white">udah ada setahun</b>. Adopsi:{" "}
-            <b className="text-amber-300">0%</b>. Namanya: <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">twelve</code>,{" "}
-            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">sixteen</code>. Dev gak tau nilainya buat apa →
-            nulis <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono">12</code> langsung.
+          <div className="text-4xl">🤔</div>
+          <p className="text-xl text-white/90">
+            Token udah ada <b className="text-white">setahun</b>. Tapi namanya{" "}
+            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">twelve</code>,{" "}
+            <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-amber-200">sixteen</code>.{" "}
+            Dev baca nama itu, gak ngerti buat apa → ya udah nulis <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono">12</code> langsung.
           </p>
         </Glass>
         <div className="mt-5 text-2xl font-semibold text-white">
-          Naming itu <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-pink-300">90% dari masalah adopsi</span>.
+          Nama yang jelas → dev pake sendiri. Nama yang aneh → dev males pake.
         </div>
       </Shell>
     ),
