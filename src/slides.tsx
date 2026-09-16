@@ -67,7 +67,7 @@ export const SLIDES: SlideDef[] = [
     act: "A1",
     actColor: "#818cf8",
     title: "Goodbye Magic Numbers",
-    note: "Perkenalan singkat: gue dari iOS design system, mantan UI/UX. Frame: ini nyambung ke semua role di ruangan, bukan cuma iOS.",
+    note: "Perkenalan singkat: gue dari design system, mantan UI/UX. Frame: ini nyambung ke semua role di ruangan.",
     body: (
       <Shell>
         <div className="blueprint absolute inset-x-0 top-0 -z-10 h-full opacity-60" />
@@ -106,8 +106,8 @@ export const SLIDES: SlideDef[] = [
             <GameGrid
               items={[
                 { num: "16", role: "UI/UX", claim: "jarak antar konten (spacing)", color: "text-pink-300" },
-                { num: "16", role: "iOS", claim: "radius kartu total (corner)", color: "text-cyan-300" },
-                { num: "16dp", role: "Android", claim: "dimens resource", color: "text-emerald-300" },
+                { num: "16", role: "FE Mobile", claim: "radius kartu total (corner)", color: "text-cyan-300" },
+                { num: "16dp", role: "FE Mobile", claim: "dimens resource", color: "text-emerald-300" },
               ]}
             />
           </div>
@@ -133,8 +133,8 @@ export const SLIDES: SlideDef[] = [
         <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["16", "spacing antar konten", "kata si UI/UX bilang: jarak", "text-pink-300"],
-            ["16", "radius kartu total", "iOS bilang: sudut `cenah`", "text-cyan-300"],
-            ["16dp", "dimens resource", "Android bilang: kayanya ukuran", "text-emerald-300"],
+            ["16", "radius kartu total", "FE bilang: sudut kartu", "text-cyan-300"],
+            ["16dp", "dimens resource", "FE bilang: ukuran di code", "text-emerald-300"],
           ].map(([n, what, who, c]) => (
             <Glass key={n} className="p-5">
               <div className={`font-mono text-3xl font-black ${c}`}>{n}</div>
@@ -281,7 +281,7 @@ export const SLIDES: SlideDef[] = [
     act: "A2",
     actColor: "#22d3ee",
     title: "Satu bahasa, empat wujud",
-    note: "Prinsip gak spesifik iOS: {context}.{property}.{direction}.{size}. Nilai sama antar konteks = disengaja. Pilih by intent bukan by angka.",
+    note: "Prinsip gak spesifik framework: {context}.{property}.{direction}.{size}. Nilai sama antar konteks = disengaja. Pilih by intent bukan by angka.",
     body: (
       <Shell>
         <SlideTitle act="A2" title="Satu bahasa, empat wujud" />
@@ -308,19 +308,11 @@ export const SLIDES: SlideDef[] = [
                   ],
                 },
                 {
-                  name: "🍎 iOS",
+                  name: "📱 Mobile Dev",
                   rows: [
                     { left: "screen.margin", right: "margin layar" },
                     { left: "card.radius", right: "radius kartu" },
                     { left: "Semantic.Text.Brand", right: "teks brand" },
-                  ],
-                },
-                {
-                  name: "🤖 Android",
-                  rows: [
-                    { left: "dimens.screen_margin", right: "margin layar" },
-                    { left: "dimens.card_radius", right: "radius kartu" },
-                    { left: "color_semantic_primary", right: "teks/warna brand" },
                   ],
                 },
               ]}
@@ -413,16 +405,15 @@ export const SLIDES: SlideDef[] = [
     act: "A3",
     actColor: "#34d399",
     title: "Satu layar, empat tahap, empat bahasa",
-    note: "Transisi ke case study. Layar Konfirmasi Transfer dibedah dari lahir sampai jalan: Figma → iOS → Android.",
+    note: "Transisi ke case study. Layar Konfirmasi Transfer dibedah dari lahir sampai jalan: Figma → code.",
     body: (
       <Shell>
         <SlideTitle act="A3" title="Satu layar, empat tahap, empat bahasa" />
         <div className="mt-8">
           <FlowRow
-            items={[
+              items={[
               { label: "🎨 Figma", sub: "spacing & radius jadi nama" },
-              { label: "🍎 iOS", sub: "dari .padding(16)" },
-              { label: "🤖 Android", sub: "dimens & resource" },
+              { label: "📱 Mobile Dev", sub: "dari .padding(16)" },
             ]}
           />
         </div>
@@ -469,11 +460,11 @@ export const SLIDES: SlideDef[] = [
     id: "s11",
     act: "A3",
     actColor: "#34d399",
-    title: "iOS — dari angka ke nama",
-    note: "Contoh utama: radius jadi satu kata, warna 6-level jadi 1 properti. Desain ganti 16→20 = satu tempat berubah, semua layar ngikut.",
+    title: "Mobile Dev — dari angka ke nama",
+    note: "Contoh: radius jadi satu kata, warna 6-level jadi 1 properti. Desain ganti 16→20 = satu tempat berubah, semua screen ngikut.",
     body: (
       <Shell>
-        <SlideTitle act="A3" title="iOS — dari angka ke nama" />
+        <SlideTitle act="A3" title="Mobile Dev — dari angka ke nama" />
         <CodeCmp
           title="SwiftUI"
           before={[
@@ -503,31 +494,30 @@ export const SLIDES: SlideDef[] = [
     id: "s12",
     act: "A3",
     actColor: "#34d399",
-    title: "Android — polanya sama, wujudnya beda",
-    note: "Framing blueprint — jangan klaim implementasi Android BRI udah gini. Resource dimens/color + Compose theme. Aturan main: nama = makna.",
+    title: "Pola sama, wujud beda per framework",
+    note: "Framing blueprint — aturan main: nama = makna. Bisa React Native, Kotlin, Swift — polanya sama.",
     body: (
       <Shell>
-        <SlideTitle act="A3" title="Android — polanya sama, wujudnya beda" />
+        <SlideTitle act="A3" title="Pola sama, wujud beda per framework" />
         <div className="mt-7 grid gap-4 lg:grid-cols-2">
           <CodeBlock
-            title="res/values/dimens.xml"
+            title="contoh: resource dimens (concept)"
             rows={[
-              { t: '<dimen name="screen_margin_horizontal">16dp</dimen>' },
-              { t: '<dimen name="card_radius">16dp</dimen>', tone: "pink" },
-              { t: '<dimen name="section_gap">24dp</dimen>' },
+              { t: 'screen_margin_horizontal = 16' },
+              { t: 'card_radius = 16', tone: "pink" },
+              { t: 'section_gap = 24' },
             ]}
           />
           <div className="flex flex-col justify-center gap-3">
             <Glass className="p-6">
               <div className="text-xl text-slate-200">
-                Nama = <b className="text-white">konteks + makna</b>, bukan ukuran. Satu sumber nilai di{" "}
-                <code className="rounded bg-white/10 px-1.5 font-mono text-xs">dimens.xml</code>, gak ada <code className="rounded bg-white/10 px-1.5 font-mono text-xs">16</code> nyasar di layout.
+                Nama = <b className="text-white">konteks + makna</b>, bukan ukuran. Satu sumber nilai, gak ada <code className="rounded bg-white/10 px-1.5 font-mono text-xs">16</code> nyasar di mana-mana.
               </div>
             </Glass>
             <Glass className="border-amber-300/20 p-6">
               <div className="text-xl uppercase tracking-widest text-amber-300">Sejujurnya…</div>
-              <p className="mt-1 text-xl text-white/70">
-                Gue gak bisa klaim Android BRI udah sempurna gini. Ini <b className="text-white">blueprint</b> — iOS udah jalan, bahasa-nya bisa ditiru.
+              <p className="mt-1 text-base text-slate-400">
+                Ini <b className="text-white">blueprint</b> — bahasanya bisa ditiru di framework apapun.
               </p>
             </Glass>
           </div>
@@ -701,14 +691,13 @@ export const SLIDES: SlideDef[] = [
     id: "s19",
     act: "A4",
     actColor: "#e879f9",
-    title: "Bukan cuma iOS",
-    note: "Templating = pola universal. Android wizard, Figma component. Prinsip: jangan generate manual, generate dari pola.",
+    title: "Bukan cuma satu platform",
+    note: "Templating = pola universal. Prinsip: jangan generate manual, generate dari pola.",
     body: (
       <Shell>
-        <SlideTitle act="A4" title="Bukan cuma iOS" />
+        <SlideTitle act="A4" title="Bukan cuma satu platform" />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card icon="🍎" title="iOS" desc="Tuist scaffold + Xcode file template" className="ring-1 ring-emerald-300/20" />
-          <Card icon="🤖" title="Android" desc="Wizard module → resource + screen token-clean (pola sama)" />
+          <Card icon="📱" title="Mobile Dev" desc="Template scaffold — token-clean dari awal" className="ring-1 ring-emerald-300/20" />
           <Card icon="🎨" title="UI/UX" desc="Figma component + variables — sumber polanya" />
         </div>
         <div className="glass mt-8 rounded-2xl p-6 text-center">
@@ -771,7 +760,7 @@ export const SLIDES: SlideDef[] = [
           </div>
           <div className="flex flex-col justify-center gap-3">
             <p className="text-2xl text-slate-200">
-              Layar yang sama. Tapi sekarang tiap orang yang buka — desainer, iOS, Android —{" "}
+              Layar yang sama. Tapi sekarang tiap orang yang buka — desainer, developer —{" "}
               <b className="text-white">langsung ngerti keputusannya</b>.
             </p>
             <div className="text-xl text-white/70">
