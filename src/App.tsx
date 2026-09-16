@@ -10,15 +10,19 @@ const ACTS = [
   { key: "A5", short: "action", full: "action.one-promise" },
 ];
 
-/* ── BroadcastChannel helper ── */
-function useChannel() {
-  return useMemo(() => {
-    try {
-      return new BroadcastChannel("deck-remote");
-    } catch {
-      return null;
-    }
-  }, []);
+/* ── helpers ── */
+function isMobile() {
+  if (typeof navigator === "undefined") return false;
+  return /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
+}
+
+function getHashIndex(): number | null {
+  const m = window.location.hash.match(/#slide=(\d+)/);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+function setHashIndex(i: number) {
+  history.replaceState(null, "", `#slide=${i}`);
 }
 
 /* ── Main Deck ── */
@@ -28,28 +32,49 @@ function Deck() {
   const scrollRef = useRef<HTMLElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const wheelLock = useRef(0);
-  const ch = useChannel();
+  const lastHash = useRef(0);
 
-  const next = useCallback(() => setIndex((i) => Math.min(SLIDES.length - 1, i + 1)), []);
-  const prev = useCallback(() => setIndex((i) => Math.max(0, i - 1)), []);
-  const jump = useCallback((i: number) => setIndex(Math.max(0, Math.min(SLIDES.length - 1, i))), []);
+  const goTo = useCallback((i: number) => {
+    const clamped = Math.max(0, Math.min(SLIDES.length - 1, i));
+    setIndex(clamped);
+    setHashIndex(clamped);
+  }, []);
 
-  /* broadcast slide changes */
+  const next = useCallback(() => setIndex((i) => {
+    const n = Math.min(SLIDES.length - 1, i + 1);
+    setHashIndex(n);
+    return n;
+  }), []);
+
+  const prev = useCallback(() => setIndex((i) => {
+    const n = Math.max(0, i - 1);
+    setHashIndex(n);
+    return n;
+  }), []);
+
+  const jump = useCallback((i: number) => {
+    const clamped = Math.max(0, Math.min(SLIDES.length - 1, i));
+    setIndex(clamped);
+    setHashIndex(clamped);
+  }, []);
+
+  /* poll hash for remote control */
   useEffect(() => {
-    ch?.postMessage({ type: "slide", index, total: SLIDES.length, note: SLIDES[index].note, title: SLIDES[index].title });
-  }, [index, ch]);
-
-  /* listen for remote commands */
-  useEffect(() => {
-    if (!ch) return;
-    const handler = (e: MessageEvent) => {
-      if (e.data?.type === "next") next();
-      else if (e.data?.type === "prev") prev();
-      else if (e.data?.type === "jump" && typeof e.data.index === "number") jump(e.data.index);
+    const poll = () => {
+      const h = getHashIndex();
+      if (h !== null && h !== lastHash.current) {
+        lastHash.current = h;
+        setIndex(h);
+      }
     };
-    ch.addEventListener("message", handler);
-    return () => ch.removeEventListener("message", handler);
-  }, [ch, next, prev, jump]);
+    const iv = setInterval(poll, 200);
+    return () => clearInterval(iv);
+  }, []);
+
+  /* sync lastHash on local nav */
+  useEffect(() => {
+    lastHash.current = index;
+  }, [index]);
 
   /* fullscreen state */
   useEffect(() => {
@@ -83,7 +108,7 @@ function Deck() {
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev, toggleFullscreen]);
 
-  /* wheel: scroll inside current slide first, switch at edges */
+  /* wheel */
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
       const now = Date.now();
@@ -154,22 +179,12 @@ function Deck() {
 
       {/* prev / next */}
       <div className="absolute bottom-6 left-4 z-40 flex items-center gap-2 sm:left-6">
-        <button
-          onClick={prev}
-          disabled={index === 0}
+        <button onClick={prev} disabled={index === 0}
           className="glass flex h-14 w-14 items-center justify-center rounded-full text-slate-200 transition enabled:hover:bg-white/10 disabled:opacity-30"
-          aria-label="Sebelumnya"
-        >
-          ←
-        </button>
-        <button
-          onClick={next}
-          disabled={index === SLIDES.length - 1}
+          aria-label="Sebelumnya">←</button>
+        <button onClick={next} disabled={index === SLIDES.length - 1}
           className="glass flex h-14 w-14 items-center justify-center rounded-full text-slate-200 transition enabled:hover:bg-white/10 disabled:opacity-30"
-          aria-label="Berikutnya"
-        >
-          →
-        </button>
+          aria-label="Berikutnya">→</button>
         <span className="glass rounded-full px-4 py-1.5 font-mono text-[18px] text-white/70">
           {String(index + 1).padStart(2, "0")}/{SLIDES.length}
         </span>
@@ -177,155 +192,149 @@ function Deck() {
 
       {/* fullscreen toggle */}
       <div className="absolute bottom-6 right-4 z-40 sm:right-6">
-        <button
-          onClick={toggleFullscreen}
-          title={isFs ? "Keluar fullscreen (F)" : "Fullscreen (F)"}
-          className={`glass flex h-14 w-14 items-center justify-center rounded-full text-2xl transition ${
-            isFs ? "text-white ring-1 ring-white/50" : "text-white/90 hover:text-white"
-          }`}
-          aria-label="Fullscreen"
-        >
-          {isFs ? "⤡" : "⛶"}
-        </button>
+        <button onClick={toggleFullscreen} title={isFs ? "Exit fullscreen (F)" : "Fullscreen (F)"}
+          className={`glass flex h-14 w-14 items-center justify-center rounded-full text-2xl transition ${isFs ? "text-white ring-1 ring-white/50" : "text-white/90 hover:text-white"}`}
+          aria-label="Fullscreen">{isFs ? "⤡" : "⛶"}</button>
       </div>
     </div>
   );
 }
 
-/* ── Remote Control ── */
-function Remote() {
-  const [index, setIndex] = useState(0);
-  const [note, setNote] = useState(SLIDES[0].note);
-  const [title, setTitle] = useState(SLIDES[0].title);
-  const [connected, setConnected] = useState(false);
-  const ch = useChannel();
-  const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-
+/* ── Remote: Desktop (QR only) ── */
+function RemoteDesktop() {
   const remoteUrl = typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}?remote=control` : "";
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=06070c&color=ffffff&data=${encodeURIComponent(remoteUrl)}`;
 
-  /* listen for slide updates from deck */
+  return (
+    <div className="fixed inset-0 overflow-hidden">
+      <div className="neon-mesh absolute inset-0 -z-20" />
+      <MagicScene active={0} />
+      <main className="relative z-10 flex min-h-screen flex-col items-center justify-center p-10 text-center">
+        <span className="glass rounded-full px-4 py-1.5 text-[18px] font-bold tracking-wide text-white mb-8">
+          🎛️ Remote Control
+        </span>
+        <div className="glass rounded-3xl p-10 flex flex-col items-center gap-6">
+          <div className="text-xl text-white/60">Scan dari HP buat kontrol presentasi</div>
+          <img src={qrSrc} alt="QR Remote" className="rounded-2xl" width={280} height={280} />
+          <div className="text-sm text-white/40 font-mono max-w-[320px] break-all">{remoteUrl}</div>
+          <button
+            onClick={() => navigator.clipboard?.writeText(remoteUrl)}
+            className="glass rounded-full px-6 py-2 text-base text-white/70 hover:text-white transition"
+          >
+            📋 Copy link
+          </button>
+          <div className="text-sm text-white/30 mt-2">
+            Buka link di HP → kontrol slide dari sana
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+/* ── Remote: Mobile (full control) ── */
+function RemoteMobile() {
+  const [index, setIndex] = useState(() => getHashIndex() ?? 0);
+  const [note, setNote] = useState(SLIDES[getHashIndex() ?? 0]?.note ?? SLIDES[0].note);
+  const [title, setTitle] = useState(SLIDES[getHashIndex() ?? 0]?.title ?? SLIDES[0].title);
+  const pollRef = useRef(0);
+
+  /* poll hash to stay in sync with main deck */
   useEffect(() => {
-    if (!ch) return;
-    const handler = (e: MessageEvent) => {
-      if (e.data?.type === "slide") {
-        setIndex(e.data.index);
-        setNote(e.data.note);
-        setTitle(e.data.title);
-        setConnected(true);
-        clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => setConnected(false), 3000);
+    const poll = () => {
+      const h = getHashIndex();
+      if (h !== null && h !== pollRef.current && h !== index) {
+        pollRef.current = h;
+        setIndex(h);
+        setNote(SLIDES[h]?.note ?? "");
+        setTitle(SLIDES[h]?.title ?? "");
       }
     };
-    ch.addEventListener("message", handler);
-    return () => ch.removeEventListener("message", handler);
-  }, [ch]);
+    const iv = setInterval(poll, 300);
+    return () => clearInterval(iv);
+  }, [index]);
 
-  const sendNext = useCallback(() => ch?.postMessage({ type: "next" }), [ch]);
-  const sendPrev = useCallback(() => ch?.postMessage({ type: "prev" }), [ch]);
-  const sendJump = useCallback((i: number) => ch?.postMessage({ type: "jump", index: i }), [ch]);
+  const sendSlide = useCallback((i: number) => {
+    const clamped = Math.max(0, Math.min(SLIDES.length - 1, i));
+    setIndex(clamped);
+    pollRef.current = clamped;
+    setNote(SLIDES[clamped].note);
+    setTitle(SLIDES[clamped].title);
+    setHashIndex(clamped);
+  }, []);
 
   const total = SLIDES.length;
   const pct = ((index + 1) / total) * 100;
 
-  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&bgcolor=06070c&color=ffffff&data=${encodeURIComponent(remoteUrl)}`;
-
   return (
     <div className="fixed inset-0 overflow-hidden">
-      {/* 3D bg same as main deck */}
       <div className="neon-mesh absolute inset-0 -z-20" />
       <MagicScene active={index} />
-
-      <main className="relative z-10 min-h-screen overflow-y-auto p-6 sm:p-10">
+      <main className="relative z-10 min-h-screen overflow-y-auto p-5 text-white">
         {/* header */}
-        <div className="flex items-center justify-between mb-8">
-          <span className="glass rounded-full px-4 py-1.5 text-[18px] font-bold tracking-wide text-white">
-            🎛️ Remote Control
+        <div className="flex items-center justify-between mb-6">
+          <span className="glass rounded-full px-3 py-1.5 text-[16px] font-bold text-white">
+            🎛️ Remote
           </span>
-          <span className={`glass rounded-full px-3 py-1.5 text-[16px] font-mono ${connected ? "text-emerald-300" : "text-white/50"}`}>
-            {connected ? "● connected" : "○ waiting…"}
+          <span className="glass rounded-full px-3 py-1.5 text-[14px] font-mono text-emerald-300">
+            ● live
           </span>
         </div>
 
-        {/* QR code + slide counter side by side */}
-        <div className="grid gap-6 lg:grid-cols-[auto_1fr] mb-6">
-          {/* QR code card */}
-          <div className="glass rounded-2xl p-6 flex flex-col items-center gap-4">
-            <div className="text-sm uppercase tracking-wider text-white/50">Scan to open on phone</div>
-            <img src={qrSrc} alt="QR Remote" className="rounded-xl" width={220} height={220} />
-            <div className="text-xs text-white/40 font-mono break-all text-center max-w-[240px]">{remoteUrl}</div>
-            <button
-              onClick={() => navigator.clipboard?.writeText(remoteUrl)}
-              className="glass rounded-full px-4 py-1.5 text-sm text-white/70 hover:text-white transition"
-            >
-              📋 Copy link
-            </button>
+        {/* slide counter + nav */}
+        <div className="glass rounded-2xl p-5 mb-4">
+          <div className="flex items-center gap-4 mb-3">
+            <button onClick={() => sendSlide(index - 1)} disabled={index === 0}
+              className="glass flex h-14 w-14 items-center justify-center rounded-full text-2xl transition enabled:hover:bg-white/10 disabled:opacity-30">←</button>
+            <div className="flex-1 text-center">
+              <div className="text-5xl font-black font-mono">{String(index + 1).padStart(2, "0")}</div>
+              <div className="text-base text-white/50">of {total}</div>
+            </div>
+            <button onClick={() => sendSlide(index + 1)} disabled={index === total - 1}
+              className="glass flex h-14 w-14 items-center justify-center rounded-full text-2xl transition enabled:hover:bg-white/10 disabled:opacity-30">→</button>
           </div>
-
-          {/* slide counter + nav */}
-          <div className="glass rounded-2xl p-6 flex flex-col justify-center">
-            <div className="flex items-center gap-6 mb-4">
-              <button onClick={sendPrev} disabled={index === 0}
-                className="glass flex h-16 w-16 items-center justify-center rounded-full text-3xl transition enabled:hover:bg-white/10 disabled:opacity-30">
-                ←
-              </button>
-              <div className="flex-1 text-center">
-                <div className="text-7xl font-black font-mono">{String(index + 1).padStart(2, "0")}</div>
-                <div className="text-xl text-white/50 mt-1">of {total}</div>
-              </div>
-              <button onClick={sendNext} disabled={index === total - 1}
-                className="glass flex h-16 w-16 items-center justify-center rounded-full text-3xl transition enabled:hover:bg-white/10 disabled:opacity-30">
-                →
-              </button>
-            </div>
-            <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 transition-[width] duration-300" style={{ width: `${pct}%` }} />
-            </div>
+          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 transition-[width] duration-200" style={{ width: `${pct}%` }} />
           </div>
         </div>
 
         {/* current slide title */}
-        <div className="glass rounded-2xl p-5 mb-6">
-          <div className="text-sm uppercase tracking-wider text-white/50 mb-2">Current Slide</div>
-          <div className="text-3xl font-bold">{title}</div>
+        <div className="glass rounded-2xl p-4 mb-4">
+          <div className="text-xs uppercase tracking-wider text-white/50 mb-1">Current Slide</div>
+          <div className="text-2xl font-bold">{title}</div>
         </div>
 
-        {/* speaker notes / cheat sheet */}
-        <div className="glass rounded-2xl p-5 mb-6">
-          <div className="text-sm uppercase tracking-wider text-white/50 mb-3">📝 Speaker Notes</div>
-          <p className="text-2xl leading-relaxed text-white/90">{note}</p>
+        {/* speaker notes */}
+        <div className="glass rounded-2xl p-4 mb-4">
+          <div className="text-xs uppercase tracking-wider text-white/50 mb-2">📝 Notes</div>
+          <p className="text-lg leading-relaxed text-white/90">{note}</p>
         </div>
 
         {/* quick jump grid */}
-        <div className="glass rounded-2xl p-5 mb-6">
-          <div className="text-sm uppercase tracking-wider text-white/50 mb-3">Jump to Slide</div>
-          <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+        <div className="glass rounded-2xl p-4 mb-4">
+          <div className="text-xs uppercase tracking-wider text-white/50 mb-2">Jump</div>
+          <div className="grid grid-cols-7 gap-1.5">
             {SLIDES.map((s, i) => (
-              <button
-                key={s.id}
-                onClick={() => sendJump(i)}
-                className={`rounded-lg py-2.5 text-base font-mono transition ${
-                  i === index
-                    ? "bg-white/25 text-white ring-1 ring-white/50"
-                    : "bg-white/5 text-white/50 hover:bg-white/15 hover:text-white"
-                }`}
-              >
-                {i + 1}
-              </button>
+              <button key={s.id} onClick={() => sendSlide(i)}
+                className={`rounded-lg py-2 text-sm font-mono transition ${
+                  i === index ? "bg-white/25 text-white ring-1 ring-white/50" : "bg-white/5 text-white/50 active:bg-white/20"
+                }`}>{i + 1}</button>
             ))}
           </div>
         </div>
 
-        {/* all notes cheat sheet */}
+        {/* all notes */}
         <div className="mb-10">
-          <div className="text-sm uppercase tracking-wider text-white/50 mb-3">📋 All Notes Cheat Sheet</div>
-          <div className="space-y-3">
+          <div className="text-xs uppercase tracking-wider text-white/50 mb-2">📋 All Notes</div>
+          <div className="space-y-2">
             {SLIDES.map((s, i) => (
-              <div key={s.id} className={`glass rounded-xl p-4 transition ${i === index ? "ring-1 ring-cyan-400/50" : "opacity-60"}`}>
-                <div className="flex items-center gap-3 mb-1">
-                  <span className="font-mono text-base text-white/50">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="font-bold text-lg text-white">{s.title}</span>
+              <div key={s.id} className={`glass rounded-xl p-3 transition ${i === index ? "ring-1 ring-cyan-400/50" : "opacity-50"}`}
+                onClick={() => sendSlide(i)}>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="font-mono text-sm text-white/50">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-bold text-white">{s.title}</span>
                 </div>
-                <p className="text-lg text-white/70 ml-8">{s.note}</p>
+                <p className="text-sm text-white/70 ml-6">{s.note}</p>
               </div>
             ))}
           </div>
@@ -340,5 +349,6 @@ export default function App() {
   const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
   const isRemote = params?.get("remote") === "control";
 
-  return isRemote ? <Remote /> : <Deck />;
+  if (!isRemote) return <Deck />;
+  return isMobile() ? <RemoteMobile /> : <RemoteDesktop />;
 }
