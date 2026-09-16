@@ -548,7 +548,7 @@ export const SLIDES: SlideDef[] = [
           {[
             { code: "BRIColors.Semantic.Text.Brand.Primary.default.color", tag: "6 level — bener tapi berat", tone: "text-slate-200" },
             { code: "BRI.Text.brand", tag: "3 level — lebih baik", tone: "text-white/90" },
-            { code: ".textBrandPrimaryMain", tag: "1 properti — ini yang dipakai orang", tone: "text-cyan-200" },
+            { code: ".textBrandPrimaryMain", tag: "1 properti — solusi memudahkan orang", tone: "text-cyan-200" },
             { code: ".bodyMediumRegular", tag: "font juga gitu — BRIFont.bodyMediumRegular", tone: "text-fuchsia-200" },
           ].map((r, i) => (
             <div key={i} className={`glass flex flex-wrap items-center justify-between gap-2 rounded-xl px-6 py-4 ${i === 2 || i === 3 ? "ring-1 ring-cyan-300/20" : ""}`}>
@@ -556,9 +556,6 @@ export const SLIDES: SlideDef[] = [
               <span className="text-xl text-slate-200">{r.tag}</span>
             </div>
           ))}
-        </div>
-        <div className="mt-6 text-2xl font-semibold text-white">
-          Kalau enak → orang pakai sendiri. Kalau ribet → orang bikin angka ajaib baru.
         </div>
       </Shell>
     ),
@@ -569,11 +566,11 @@ export const SLIDES: SlideDef[] = [
     id: "s15",
     act: "A4",
     actColor: "#e879f9",
-    title: "Pola yang cuma diingat, bakal dilanggar",
+    title: "Aturan di ingatan pasti lupa",
     note: "Aturan tertulis gak cukup, ingatan bocor. Template = cara kunci bahasa biar layar baru lahir udah benar, tanpa mikir.",
     body: (
       <Shell>
-        <SlideTitle act="A4" title="Pola yang cuma diingat, bakal dilanggar" />
+        <SlideTitle act="A4" title="Aturan di ingatan pasti lupa" />
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <Card icon="🧠" title="Ingatan" desc="Bocor. Dev baru, dev buru-buru, dev yang gak hafal design system — semua lupa." />
           <Card icon="📄" title="Aturan di doc" desc="Jarang dibaca. Doc gak bisa mastiin output-nya bener." />
