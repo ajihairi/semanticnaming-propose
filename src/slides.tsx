@@ -187,6 +187,64 @@ export const SLIDES: SlideDef[] = [
       </Shell>
     ),
   },
+  /* ---------------- WHY — comparison screens ---------------- */
+  {
+    id: "s05",
+    act: "A1",
+    actColor: "#818cf8",
+    title: "Kenapa butuh ini? Over-engineer kah?",
+    note: "WHY utama: bukan 1-10 screen, tapi super app dengan ratusan screen. Reskin bisa terjadi kapan saja. Token = insurance, bukan overhead.",
+    body: (
+      <Shell>
+        <SlideTitle act="A1" title="Kenapa butuh ini? Over-engineer kah?" />
+        <div className="mt-7 grid gap-4 lg:grid-cols-3">
+          <ScreenshotSlot width="390" height="844" label="App v1 — Classic" className="min-h-[220px]" />
+          <ScreenshotSlot width="390" height="844" label="App v2 — New Skin" className="min-h-[220px]" />
+          <ScreenshotSlot width="390" height="844" label="App v3 — Reskin" className="min-h-[220px]" />
+        </div>
+        <div className="mt-4 glass rounded-2xl p-5">
+          <div className="text-xl text-white/90 text-center">
+            Layout <span className="text-cyan-300 font-bold">SAMA</span>. Style <span className="text-fuchsia-300 font-bold">BEDA BANGET</span>. Spacing & radius tetap — karena pakai token.
+          </div>
+        </div>
+      </Shell>
+    ),
+  },
+  {
+    id: "s06",
+    act: "A1",
+    actColor: "#818cf8",
+    title: "1-10 screen? Gak butuh. Super app? WAJIB.",
+    note: "Di 1-10 screen hardcode oke. Di super app ratusan screen: hardcode = bom waktu. Reskin bukan 'kalau' tapi 'kapan'. Token = insurance.",
+    body: (
+      <Shell>
+        <SlideTitle act="A1" title="1-10 screen? Gak butuh. Super app? WAJIB." />
+        <div className="mt-7 grid gap-6 lg:grid-cols-2">
+          <Glass className="p-6">
+            <div className="text-xl font-bold text-white/50 mb-3">1–10 Screen</div>
+            <div className="space-y-2 text-xl text-white/70">
+              <div>✓ Hardcode oke</div>
+              <div>✓ Reskin = rebuild</div>
+              <div>✓ Satu dev handle</div>
+              <div>✓ Murah untuk 1 layar</div>
+            </div>
+          </Glass>
+          <Glass className="p-6 ring-1 ring-fuchsia-300/30">
+            <div className="text-xl font-bold text-fuchsia-300 mb-3">Super App (50–500 screen)</div>
+            <div className="space-y-2 text-xl">
+              <div>✗ Hardcode = <span className="text-rose-300">bom waktu</span></div>
+              <div>✓ Reskin = <span className="text-emerald-300">update token</span></div>
+              <div>✓ Tim besar, banyak role</div>
+              <div>✓ Murah untuk <span className="text-emerald-300">ratusan layar</span></div>
+            </div>
+          </Glass>
+        </div>
+        <div className="mt-8 text-center text-2xl font-bold text-white">
+          Token bukan over-engineering — itu <span className="text-fuchsia-300">insurance</span>.
+        </div>
+      </Shell>
+    ),
+  },
 
   /* ---------------- ACT 2 ---------------- */
   {
