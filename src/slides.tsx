@@ -110,12 +110,9 @@ export const SLIDES: SlideDef[] = [
               ]}
             />
           </div>
-          <ScreenshotSlot
-            width="1284"
-            height="2778"
-            label="Screenshot Konfirmasi Transfer"
-            className="h-56 w-full lg:h-[380px]"
-          />
+          <div className="flex h-56 w-full items-center justify-center overflow-hidden rounded-2xl lg:h-[380px]">
+            <img src="/transaksi-screen.png" alt="Screenshot Transaksi" className="h-full object-contain" />
+          </div>
         </div>
       </Shell>
     ),
