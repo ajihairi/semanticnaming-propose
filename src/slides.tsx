@@ -90,16 +90,16 @@ export const SLIDES: SlideDef[] = [
     id: "s02",
     act: "A1",
     actColor: "#818cf8",
-    title: "Berapa Angka di Layar Ini?",
-    note: "Main tebak-tebakan. Tampung 3-4 jawaban acak dari audiens. Semua angka ini ada di layar Konfirmasi Transfer.",
+    title: "Satu Angka, Banyak Makna?",
+    note: "Gambar udah nunjukin 16 — tapi 16 ini buat apa? Tergantung siapa yang make. Pertanyaannya bukan 'berapa' tapi 'buat apa'.",
     body: (
       <Shell>
-        <SlideTitle act="A1" title="Berapa Angka di Layar Ini?" />
+        <SlideTitle act="A1" title="Satu Angka, Banyak Makna?" />
         <div className="mt-6 grid items-center gap-6 lg:grid-cols-[auto_1fr]">
           <div>
             <p className="max-w-3xl text-xl text-white/90">
-              Layar ini adalah <b className="text-white">Konfirmasi Transfer</b>.{" "}
-              <span className="text-white/70">Perhatikan angka-angka di dalamnya — klik untuk melihat pemiliknya.</span>
+              Angka <b className="text-white">16</b> keliatan di layar. Tapi <b className="text-white">16 ini buat apa?</b>{" "}
+              <span className="text-white/70">Tergantung siapa yang make. Klik untuk lihat.</span>
             </p>
             <GameGrid
               items={[
