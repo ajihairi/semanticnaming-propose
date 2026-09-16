@@ -120,11 +120,11 @@ export const SLIDES: SlideDef[] = [
     id: "s03",
     act: "A1",
     actColor: "#818cf8",
-    title: "Satu Angka, Tiga Makna — Dan Itu Masalahnya.",
+    title: "Masalahnya: Gak Ada Bahasa Bersama.",
     note: "Kunci slide: 16 yang sama punya arti beda per role. Masalahnya bukan angkanya — tapi tidak ada bahasa bersama.",
     body: (
       <Shell>
-        <SlideTitle act="A1" title="Satu Angka, Tiga Makna — Dan Itu Masalahnya." />
+        <SlideTitle act="A1" title="Masalahnya: Gak Ada Bahasa Bersama." />
         <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["16", "spacing antar konten", "kata si UI/UX bilang: jarak", "text-pink-300"],
