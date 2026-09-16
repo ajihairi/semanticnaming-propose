@@ -180,44 +180,6 @@ export const SLIDES: SlideDef[] = [
       </Shell>
     ),
   },
-  /* ---------------- WHY — comparison screens ---------------- */
-  {
-    id: "s05",
-    act: "A1",
-    actColor: "#818cf8",
-    title: "Kenapa butuh ini? Over-engineer kah?",
-    note: "WHY utama: bukan 1-10 screen, tapi super app dengan ratusan screen. Reskin bisa terjadi kapan saja. Token = insurance, bukan overhead.",
-    body: (
-      <Shell>
-        <SlideTitle act="A1" title="Kenapa butuh ini? Over-engineer kah?" />
-        <div className="mt-7 grid gap-4 sm:grid-cols-3">
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
-              <img src="/screen-v1.png" alt="App v1 — Classic" className="h-full max-h-[400px] object-contain" />
-            </div>
-            <div className="text-xl text-white/50">Classic</div>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
-              <img src="/screen-v2.png" alt="App v2 — New Skin" className="h-full max-h-[400px] object-contain" />
-            </div>
-            <div className="text-xl text-white/50">New Skin</div>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
-              <img src="/screen-v3.png" alt="App v3 — Reskin" className="h-full max-h-[400px] object-contain" />
-            </div>
-            <div className="text-xl text-white/50">Inovasi Baru</div>
-          </div>
-        </div>
-        <div className="mt-4 glass rounded-2xl p-5">
-          <div className="text-xl text-white/90 text-center">
-            Layout <span className="text-cyan-300 font-bold">SAMA</span>. Style <span className="text-fuchsia-300 font-bold">BEDA BANGET</span>.
-          </div>
-        </div>
-      </Shell>
-    ),
-  },
   {
     id: "s06",
     act: "A1",
@@ -694,6 +656,44 @@ export const SLIDES: SlideDef[] = [
           <div className="text-2xl font-bold text-white">
             Jangan <span className="text-rose-300">generate manual</span> —{" "}
             <span className="text-emerald-300">generate dari pola</span>. Kamus & polanya satu.
+          </div>
+        </div>
+      </Shell>
+    ),
+  },
+  {
+    id: "s20",
+    act: "A4",
+    actColor: "#e879f9",
+    title: "Revamp? Reskin? Responsive baru? Tinggal adjust token.",
+    note: "Slide hopeful: ketika design language berubah atau device baru muncul (foldable, tablet, dll), yang perlu diubah cuma token — bukan code.",
+    body: (
+      <Shell>
+        <SlideTitle act="A4" title="Revamp? Reskin? Responsive baru? Tinggal adjust token." />
+        <div className="mt-7 grid gap-4 sm:grid-cols-3">
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/screen-v1.png" alt="Classic" className="h-full max-h-[400px] object-contain" />
+            </div>
+            <div className="text-xl text-white/50">Classic</div>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/screen-v2.png" alt="New Skin" className="h-full max-h-[400px] object-contain" />
+            </div>
+            <div className="text-xl text-white/50">New Skin</div>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/screen-v3.png" alt="Inovasi Baru" className="h-full max-h-[400px] object-contain" />
+            </div>
+            <div className="text-xl text-white/50">Inovasi Baru</div>
+          </div>
+        </div>
+        <div className="mt-4 glass rounded-2xl p-5">
+          <div className="text-xl text-white/90 text-center">
+            Layout <span className="text-cyan-300 font-bold">SAMA</span>. Style <span className="text-fuchsia-300 font-bold">BEDA BANGET</span>.{" "}
+            Token tinggal <span className="text-emerald-300 font-bold">adjust</span> — code gak disentuh.
           </div>
         </div>
       </Shell>
