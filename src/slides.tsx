@@ -151,7 +151,7 @@ export const SLIDES: SlideDef[] = [
     id: "s04",
     act: "A1",
     actColor: "#818cf8",
-    title: "Magic Number itu mahal",
+    title: "Magic Number Itu Mahal",
     note: "Fakta audit: 100+ padding raw di Features/, 2 sistem warna dengan hex beda untuk nama yang sama. Ini biaya komunikasi, bukan cuma code.",
     body: (
       <Shell>
@@ -221,7 +221,7 @@ export const SLIDES: SlideDef[] = [
     id: "s05",
     act: "A2",
     actColor: "#22d3ee",
-    title: "16 itu kata tanpa makna",
+    title: "16 Itu Kata Tanpa Makna",
     note: "Dulu gue UI/UX: desainer gak mikir 'angka 16', dia mikir 'jarak dari tepi layar'. Nama = intent. Angka buang semua konteks itu.",
     body: (
       <Shell>
@@ -336,7 +336,7 @@ export const SLIDES: SlideDef[] = [
     id: "s08",
     act: "A2",
     actColor: "#22d3ee",
-    title: "Token itu kamus bersama — bukan punya satu tim",
+    title: "Token Itu Kamus Bersama — Bukan Punya Satu Tim",
     note: "Shared ownership. Desainer define + kasih nama; dev pakai + tanya kalau gak ada; PM kasih kapasitas. Bahasa mati kalau satu sisi gak jalan.",
     body: (
       <Shell>
@@ -487,7 +487,7 @@ export const SLIDES: SlideDef[] = [
               </div>
             </Glass>
             <Glass className="border-amber-300/20 p-6">
-              <div className="text-xl uppercase tracking-widest text-amber-300">Sejujurnya…</div>
+              <div className="text-xl uppercase tracking-widest text-amber-300">Jujurly…</div>
               <p className="mt-1 text-base text-slate-400">
                 Ini <b className="text-white">blueprint</b> — bahasanya bisa ditiru di framework apapun.
               </p>
@@ -501,7 +501,7 @@ export const SLIDES: SlideDef[] = [
     id: "s14",
     act: "A3",
     actColor: "#34d399",
-    title: "Kalau gak enak dipakai, gak akan dipakai",
+    title: "Kalau Gak Enak Dipake, Gak Akan Dipake",
     note: "Idealisme harus realistis. Nama panjang bener tapi berat → tambah lapisan shortcut 1 kata. Pelajaran: token harus nyaman dipakai.",
     body: (
       <Shell>
@@ -602,7 +602,7 @@ export const SLIDES: SlideDef[] = [
     id: "s18",
     act: "A4",
     actColor: "#e879f9",
-    title: "Layar tadi? Sekarang lahir dari template",
+    title: "Layar Tadi? Sekarang Lahir Dari Template",
     note: "Payoff sirkular. Layar pembuka lahir dari template; output token-clean — nol angka ajaib. Bahasa dikunci di pola.",
     body: (
       <Shell>
@@ -665,7 +665,7 @@ export const SLIDES: SlideDef[] = [
     id: "s20",
     act: "A4",
     actColor: "#e879f9",
-    title: "Revamp? Reskin? Responsive baru? Tinggal adjust token.",
+    title: "Revamp? Reskin? Responsive Baru? Tinggal Adjust Token.",
     note: "Slide hopeful: ketika design language berubah atau device baru muncul (foldable, tablet, dll), yang perlu diubah cuma token — bukan code.",
     body: (
       <Shell>
@@ -705,7 +705,7 @@ export const SLIDES: SlideDef[] = [
     id: "s21",
     act: "A5",
     actColor: "#fbbf24",
-    title: "Goodbye magic numbers. Hello bahasa bersama.",
+    title: "Goodbye Magic Numbers. Hello Bahasa Bersama.",
     note: "Tutup sirkular: balik ke layar pembuka, highlight angka diganti label semantic. Undang Q&A.",
     body: (
       <Shell>
