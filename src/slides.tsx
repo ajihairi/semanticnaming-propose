@@ -91,16 +91,16 @@ export const SLIDES: SlideDef[] = [
     id: "s02",
     act: "A1",
     actColor: "#818cf8",
-    title: "Tebak Tebakan Angka?",
+    title: "Game: Tebak Angka!",
     note: "Main tebak-tebakan. Tampung 3-4 jawaban acak dari audiens. Semua angka ini ada di layar Konfirmasi Transfer.",
     body: (
       <Shell>
-        <SlideTitle act="A1" title="Berapa angka di layar ini?" />
+        <SlideTitle act="A1" title="Game: Tebak Angka!" />
         <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1fr_minmax(0,300px)]">
           <div>
             <p className="max-w-3xl text-xl text-white/90">
-              Ini layar <b className="text-white">Konfirmasi Transfer</b> ini bakal jadi tokoh utama presentasi ini.{" "}
-              <span className="text-white/70">Klik tiap angka buat lihat siapa ownernya.</span>
+              Lihat layar ini. <b className="text-white">Berapa angka yang lo lihat?</b>{" "}
+              <span className="text-white/70">Klik tiap angka buat lihat siapa yang make.</span>
             </p>
             <GameGrid
               items={[
