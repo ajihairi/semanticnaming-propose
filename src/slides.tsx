@@ -207,7 +207,7 @@ export const SLIDES: SlideDef[] = [
             <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
               <img src="/screen-v3.png" alt="App v3 — Reskin" className="h-full max-h-[400px] object-contain" />
             </div>
-            <div className="text-xl text-white/50">Reskin</div>
+            <div className="text-xl text-white/50">Inovasi Baru</div>
           </div>
         </div>
         <div className="mt-4 glass rounded-2xl p-5">
