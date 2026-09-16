@@ -12,7 +12,6 @@ import {
   Card,
   GameGrid,
   Tabs,
-  PromiseCheck,
   ScreenshotSlot,
 } from "./ui";
 
@@ -711,26 +710,6 @@ export const SLIDES: SlideDef[] = [
   },
 
   /* ---------------- ACT 5 ---------------- */
-  {
-    id: "s20",
-    act: "A5",
-    actColor: "#fbbf24",
-    title: "Pulang bawa satu PR (pun intended)",
-    note: "CTA per-role. Satu homework kecil: desainer kasih nama di Figma, dev ganti 1 angka ajaib di PR berikutnya, lead/PM kasih kapasitas.",
-    body: (
-      <Shell>
-        <SlideTitle act="A5" title="Pulang bawa satu PR (pun intended)" />
-        <p className="mt-4 text-lg text-white/70">Klik kartu peran lo — janjiin satu hal kecil.</p>
-        <PromiseCheck
-          items={[
-            { role: "🎨 UI/UX", text: "Kasih nama di Figma — jangan kirim angka lepas", emoji: "🎯" },
-            { role: "🧑‍💻 Dev", text: "PR berikutnya: ganti SATU angka ajaib jadi semantic name", emoji: "🔧" },
-            { role: "📋 Lead/PM", text: "Kasih kapasitas + dukung standarisasi lintas platform", emoji: "📐" },
-          ]}
-        />
-      </Shell>
-    ),
-  },
   {
     id: "s21",
     act: "A5",
