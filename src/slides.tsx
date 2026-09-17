@@ -426,14 +426,9 @@ export const SLIDES: SlideDef[] = [
       <Shell>
         <SlideTitle act="A3" title="Di Figma, namanya udah ada — tinggal dijaga" />
         <div className="mt-7 grid gap-4 lg:grid-cols-2">
-          <CodeBlock
-            title="Figma variables (yang bener)"
-            rows={[
-              { t: "spacing/section   = 24" },
-              { t: "radius/card       = 16" },
-              { t: "color/brand/main  = #307FE2", tone: "pink" },
-            ]}
-          />
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-3">
+            <img src="/figma-token-image.png" alt="Figma Radius Variables" className="w-full object-contain" />
+          </div>
           <Glass className="flex flex-col justify-center p-6">
             <div className="text-xl font-semibold text-white">PR pertama: satu kamus, dua sisi</div>
             <p className="mt-2 text-xl text-white/70">
