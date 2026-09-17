@@ -521,20 +521,18 @@ export const SLIDES: SlideDef[] = [
     body: (
       <Shell>
         <SlideTitle act="A4" title="Satu perintah, satu modul" />
-        <div className="mt-7 grid gap-4 lg:grid-cols-2">
-          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-4">
-            <img src="/template-arch.png" alt="Template Architecture" className="w-full object-contain" />
-          </div>
-          <div className="flex flex-col justify-center gap-3">
-            <div className="text-2xl font-bold text-white">Satu perintah, satu modul lengkap</div>
-            <p className="text-xl text-white/90">
-              Struktur Data/Domain/Presentation + pola UDF (State → Action → Reducer) konsisten,{" "}
-              <b className="text-white">langsung ke-register</b> ke project.
-            </p>
-            <div className="text-xl text-white/90">
-              Dev mulai dari <span className="text-fuchsia-300">pola yang udah bener</span>.
-            </div>
-          </div>
+        <div className="mt-7 flex items-center justify-center overflow-hidden rounded-2xl glass p-4">
+          <img src="/template-arch.png" alt="Template Architecture" className="w-full object-contain" />
+        </div>
+        <div className="mt-6 text-center">
+          <p className="text-2xl font-bold text-white">Satu perintah, satu modul lengkap</p>
+          <p className="mt-2 text-xl text-white/90">
+            Struktur Data/Domain/Presentation + pola UDF (State → Action → Reducer) konsisten,{" "}
+            <b className="text-white">langsung ke-register</b> ke project.
+          </p>
+          <p className="mt-2 text-xl text-white/90">
+            Dev mulai dari <span className="text-fuchsia-300">pola yang udah bener</span>.
+          </p>
         </div>
       </Shell>
     ),
