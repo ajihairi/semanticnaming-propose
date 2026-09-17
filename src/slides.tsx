@@ -326,7 +326,7 @@ export const SLIDES: SlideDef[] = [
                 },
               ]}
             />
-            <p className="mt-3 text-xs text-slate-200">Bahasa sama, wujud beda per platform.</p>
+            <p className="mt-3 text-base text-slate-200">Bahasa sama, wujud beda per platform.</p>
           </div>
         </div>
       </Shell>
@@ -483,12 +483,12 @@ export const SLIDES: SlideDef[] = [
           <div className="flex flex-col justify-center gap-3">
             <Glass className="p-6">
               <div className="text-xl text-slate-200">
-                Nama = <b className="text-white">konteks + makna</b>, bukan ukuran. Satu sumber nilai, gak ada <code className="rounded bg-white/10 px-1.5 font-mono text-xs">16</code> nyasar di mana-mana.
+                Nama = <b className="text-white">konteks + makna</b>, bukan ukuran. Satu sumber nilai, gak ada <code className="rounded bg-white/10 px-1.5 font-mono text-base">16</code> nyasar di mana-mana.
               </div>
             </Glass>
             <Glass className="border-amber-300/20 p-6">
               <div className="text-xl uppercase tracking-widest text-amber-300">Jujurly…</div>
-              <p className="mt-1 text-base text-slate-400">
+              <p className="mt-1 text-xl text-slate-400">
                 Ini <b className="text-white">blueprint</b> — bahasanya bisa ditiru di framework apapun.
               </p>
             </Glass>
@@ -609,7 +609,7 @@ export const SLIDES: SlideDef[] = [
         <SlideTitle act="A4" title="Layar tadi? Sekarang lahir dari template" />
         <div className="mt-7 grid items-stretch gap-4 lg:grid-cols-2">
           <Glass className="flex flex-col gap-3 p-6">
-            <div className="text-xs uppercase tracking-widest text-slate-200">Hasil generate template</div>
+            <div className="text-base uppercase tracking-widest text-slate-200">Hasil generate template</div>
             <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl">
               <img src="/template-native.png" alt="Generated Output" className="max-h-[300px] object-contain" />
             </div>
@@ -720,7 +720,7 @@ export const SLIDES: SlideDef[] = [
               ["16", "→", "card.radius", "text-cyan-300"],
               ["24", "→", "section.gap", "text-emerald-300"],
             ].map(([a, _, b, c]) => (
-              <div key={a} className="glass flex items-center gap-3 rounded-xl px-5 py-3 font-mono text-sm">
+              <div key={a} className="glass flex items-center gap-3 rounded-xl px-5 py-3 font-mono text-base">
                 <span className={`font-black ${c}`}>{a}</span>
                 <span className="text-slate-600">→</span>
                 <span className="text-slate-200">{b}</span>

@@ -190,7 +190,7 @@ export function GameGrid({
           <button
             key={i}
             onClick={() => setRevealed((r) => ({ ...r, [i]: !r[i] }))}
-            className={`group rounded-xl border px-5 py-3 text-left font-mono text-sm transition ${
+            className={`group rounded-xl border px-5 py-3 text-left font-mono text-base transition ${
               revealed[i]
                 ? "border-white/40 bg-white/10"
                 : "border-white/15 bg-white/[0.03] hover:border-cyan-300/50 hover:bg-white/[0.07]"
@@ -210,7 +210,7 @@ export function GameGrid({
       <button
         onClick={() => setRevealed(Object.fromEntries(items.map((_, i) => [i, true])))}
         disabled={allOpen}
-        className="mt-4 rounded-lg border border-cyan-300/40 px-3 py-1.5 text-xs text-cyan-200 transition enabled:hover:bg-cyan-300/10 disabled:opacity-30"
+        className="mt-4 rounded-lg border border-cyan-300/40 px-3 py-1.5 text-base text-cyan-200 transition enabled:hover:bg-cyan-300/10 disabled:opacity-30"
       >
         {allOpen ? "Semua kebuka — itu masalahnya 😅" : "Buka semua"}
       </button>
@@ -246,7 +246,7 @@ export function Tabs({
         {tab.rows.map((r, i) => (
           <div
             key={i}
-            className={`grid grid-cols-2 gap-3 px-5 py-3 text-sm ${i % 2 ? "bg-white/[0.02]" : ""}`}
+            className={`grid grid-cols-2 gap-3 px-5 py-3 text-base ${i % 2 ? "bg-white/[0.02]" : ""}`}
           >
             <div className="font-mono text-cyan-200">{r.left}</div>
             <div className="text-slate-200">{r.right}</div>
@@ -281,7 +281,7 @@ export function PromiseCheck({
           </button>
         ))}
       </div>
-      <div className="mt-4 text-sm text-white/70">
+      <div className="mt-4 text-base text-white/70">
         {count === items.length ? (
           <span className="text-emerald-300">
             🎉 {items.length} janji terkunci. Sebulan lagi codebase kita ngomong bahasa yang sama.
