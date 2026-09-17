@@ -710,7 +710,7 @@ export const SLIDES: SlideDef[] = [
             </p>
           </div>
         </div>
-        <div className="mt-10 text-2xl font-semibold text-amber-200">Terima kasih — Q&amp;A terbuka 💬</div>
+        <div className="mt-10 text-2xl font-semibold text-amber-200">Terimakasih sudah tidak bertanya 🙏</div>
       </Shell>
     ),
   },
