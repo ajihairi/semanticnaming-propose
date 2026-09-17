@@ -521,7 +521,16 @@ export const SLIDES: SlideDef[] = [
     body: (
       <Shell>
         <SlideTitle act="A4" title="Satu perintah, satu modul" />
-        <div className="mt-7 flex items-center justify-center overflow-hidden rounded-2xl glass p-4">
+        <div className="mt-6 flex items-center justify-center overflow-hidden rounded-2xl glass p-2">
+          <img src="/terminal-prompt.png" alt="Terminal: make module" className="w-full object-contain" />
+        </div>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-lg text-white/70">
+          <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-base text-cyan-200">make module name=Template Demo type=confirmation</span>
+          <span>→</span>
+          <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-base text-fuchsia-200">make gen</span>
+          <span className="text-base">→ auto register ke project</span>
+        </div>
+        <div className="mt-6 flex items-center justify-center overflow-hidden rounded-2xl glass p-4">
           <img src="/template-arch.png" alt="Template Architecture" className="w-full object-contain" />
         </div>
         <div className="mt-6 text-center">
