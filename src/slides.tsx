@@ -582,34 +582,29 @@ export const SLIDES: SlideDef[] = [
     body: (
       <Shell>
         <SlideTitle act="A4" title="Layar tadi? Sekarang lahir dari template" />
-        <div className="mt-7 grid items-stretch gap-4 lg:grid-cols-2">
-          <Glass className="flex flex-col gap-3 p-6">
-            <div className="text-base uppercase tracking-widest text-slate-200">Hasil generate template</div>
-            <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl">
-              <img src="/template-native.png" alt="Generated Output" className="max-h-[300px] object-contain" />
-            </div>
-            <div className="flex gap-3">
-              <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl glass p-2">
-                <img src="/template-framework.png" alt="Framework Target" className="max-h-[120px] object-contain" />
-              </div>
-              <div className="flex flex-1 items-center justify-center overflow-hidden rounded-xl glass p-2">
-                <img src="/template-arch.png" alt="Architecture" className="max-h-[120px] object-contain" />
-              </div>
-            </div>
-          </Glass>
-          <div className="flex flex-col justify-center gap-3">
-            <div className="text-2xl font-bold text-white">Output template: token clean</div>
-            <p className="text-xl text-white/90">
-              Template menghasilkan kode yang sudah menggunakan semantic tokens — bukan angka ajaib.
-            </p>
-            <div className="glass rounded-xl px-4 py-3 text-center text-xl font-bold text-amber-300">
-              In development — sebagian belum merge ke main
-            </div>
-            <p className="text-xl text-white/70">
-              Dev baru, dev buru-buru —{" "}
-              <b className="text-white">semua otomatis bener dari awal</b>.
-            </p>
+        <div className="mt-7 grid gap-4 sm:grid-cols-3">
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-3">
+            <img src="/template-native.png" alt="Generated Output" className="w-full object-contain" />
           </div>
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-3">
+            <img src="/template-framework.png" alt="Framework Target" className="w-full object-contain" />
+          </div>
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl glass p-3">
+            <img src="/template-arch.png" alt="Architecture" className="w-full object-contain" />
+          </div>
+        </div>
+        <div className="mt-6 text-center">
+          <p className="text-2xl font-bold text-white">Output template: token clean</p>
+          <p className="mt-2 text-xl text-white/90">
+            Template menghasilkan kode yang sudah menggunakan semantic tokens — bukan angka ajaib.
+          </p>
+          <div className="mx-auto mt-3 max-w-xl glass rounded-xl px-4 py-3 text-center text-xl font-bold text-amber-300">
+            In development — sebagian belum merge ke main
+          </div>
+          <p className="mt-2 text-xl text-white/70">
+            Dev baru, dev buru-buru —{" "}
+            <b className="text-white">semua otomatis bener dari awal</b>.
+          </p>
         </div>
       </Shell>
     ),
