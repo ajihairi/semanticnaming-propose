@@ -373,50 +373,6 @@ export const SLIDES: SlideDef[] = [
 
   /* ---------------- ACT 3 ---------------- */
   {
-    id: "s09",
-    act: "A3",
-    actColor: "#34d399",
-    title: "Satu layar, empat tahap, empat bahasa",
-    note: "Transisi ke case study. Layar Konfirmasi Transfer dibedah dari lahir sampai jalan: Figma → code.",
-    body: (
-      <Shell>
-        <SlideTitle act="A3" title="Satu layar, empat tahap, empat bahasa" />
-        <div className="mt-8">
-          <FlowRow
-              items={[
-              { label: "🎨 Figma", sub: "spacing & radius jadi nama" },
-              { label: "📱 Dev Before", sub: "raw .padding(16)" },
-              { label: "✅ Dev After", sub: "screen.margin + .briCardRadius()" },
-              { label: "🖼️ Layar Jadi", sub: "Konfirmasi Transfer" },
-            ]}
-          />
-        </div>
-        <CodeCmp
-          title="Layar Konfirmasi Transfer — Swift"
-          before={[
-            { t: 'VStack(alignment: .leading, spacing: 16) {', tone: "del" },
-            { t: '    HStack(spacing: 12) {', tone: "del" },
-            { t: '        RoundedRectangle(cornerRadius: 16)', tone: "del" },
-            { t: '    }', tone: "del" },
-            { t: '    .padding(16)', tone: "del" },
-            { t: '    .padding(.horizontal, 16)', tone: "del" },
-            { t: '    .cornerRadius(16)', tone: "del" },
-            { t: '    .foregroundColor(BRIColors.Black.main)', tone: "del" },
-          ]}
-          after={[
-            { t: 'VStack(alignment: .leading, spacing: sectionGap) {', tone: "add" },
-            { t: '    HStack(spacing: contentRowGap) {', tone: "add" },
-            { t: '        .briCardRadius()', tone: "add" },
-            { t: '    }', tone: "add" },
-            { t: '    .briCardPadding()', tone: "add" },
-            { t: '    .padding(.horizontal, screen.margin)', tone: "add" },
-            { t: '    .textBlackMain', tone: "add" },
-          ]}
-        />
-      </Shell>
-    ),
-  },
-  {
     id: "s10",
     act: "A3",
     actColor: "#34d399",
