@@ -640,24 +640,30 @@ export const SLIDES: SlideDef[] = [
     body: (
       <Shell>
         <SlideTitle act="A4" title="Revamp? Reskin? Responsive baru? Tinggal adjust token." />
-        <div className="mt-7 grid gap-4 sm:grid-cols-3">
+        <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-center gap-3">
             <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
-              <img src="/screen-v1.png" alt="Classic" className="h-full max-h-[400px] object-contain" />
+              <img src="/01-skin.png" alt="Skin" className="h-full max-h-[400px] object-contain" />
             </div>
-            <div className="text-xl text-white/50">Classic</div>
+            <div className="text-xl text-white/50">Skin</div>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
-              <img src="/screen-v2.png" alt="New Skin" className="h-full max-h-[400px] object-contain" />
+              <img src="/02-new-skin.jpeg" alt="New Skin" className="h-full max-h-[400px] object-contain" />
             </div>
             <div className="text-xl text-white/50">New Skin</div>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
-              <img src="/screen-v3.png" alt="Inovasi Baru" className="h-full max-h-[400px] object-contain" />
+              <img src="/03-reskin-newskin.png" alt="Reskin New Skin" className="h-full max-h-[400px] object-contain" />
             </div>
-            <div className="text-xl text-white/50">Inovasi Baru</div>
+            <div className="text-xl text-white/50">Reskin New Skin</div>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex min-h-[360px] w-full items-center justify-center overflow-hidden rounded-2xl glass p-3">
+              <img src="/04-reskin-nya-reskin.png" alt="Reskin-nya Reskin" className="h-full max-h-[400px] object-contain" />
+            </div>
+            <div className="text-xl text-white/50">Reskin-nya Reskin dari Bisnis (Misalnya)</div>
           </div>
         </div>
         <div className="mt-4 glass rounded-2xl p-5">
